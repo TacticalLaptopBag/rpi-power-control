@@ -2,11 +2,13 @@ import { Express, Request, Response } from "express";
 import { Gpio } from "onoff";
 
 function postOn(request: Request, response: Response, output: Gpio) {
+    console.log(`Pulling GPIO ${process.env.LED_PIN} HIGH`);
     output.writeSync(1);
     response.send();
 }
 
 function postOff(request: Request, response: Response, output: Gpio) {
+    console.log(`Pulling GPIO ${process.env.LED_PIN} LOW`);
     output.writeSync(0);
     response.send();
 }
