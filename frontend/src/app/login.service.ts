@@ -60,6 +60,7 @@ export class LoginService {
     }
 
     public login(username: string, password: string) {
+        console.log('Logging in...');
         this._http.post('/api/login', null, {
             observe: 'response',
             headers: {
