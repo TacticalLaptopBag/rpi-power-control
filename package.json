@@ -7,7 +7,7 @@
     "start": "node index.js",
     "start:dev": "ts-node src/index.ts",
     "build": "npx tsc",
-    "deploy": "npm run build && sudo cp -rfv dist/ /opt/rpi-power-control && sudo cp -v package.json /opt/rpi-power-control && sudo cp -v package-lock.json /opt/rpi-power-control && sudo cp -v .env /opt/rpi-power-control && cd /opt/rpi-power-control && sudo npm install --omit=dev"
+    "package": "npm run build && cp -rfv dist/ rpi-power-control/ && cp -v package.json rpi-power-control/ && cp -v package-lock.json rpi-power-control/ && cp -v .env rpi-power-control/ && cd rpi-power-control/ && npm install --omit=dev && cd .. && tar -cvf rpi-power-control.tar rpi-power-control/ && rm -rfv rpi-power-control/"
   },
   "author": "TacticalLaptopBag",
   "license": "ISC",

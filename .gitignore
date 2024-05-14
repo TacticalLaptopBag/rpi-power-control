@@ -1,4 +1,3 @@
 dist/
-minecraft/
 node_modules/
-app/
+rpi-power-control*
