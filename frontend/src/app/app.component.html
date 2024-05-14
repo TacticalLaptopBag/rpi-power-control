@@ -1,7 +1,7 @@
 <div *ngIf="!isLoggedIn">
     <input type="text" [(ngModel)]="username" placeholder="Username"/>
-    <input type="hidden" [(ngModel)]="password" placeholder="Password"/>
-    <input type="submit" (onsubmit)="submit()"/>
+    <input type="password" [(ngModel)]="password" placeholder="Password"/>
+    <input type="submit" value="Log in" (onsubmit)="submit()"/>
 </div>
 
 <div *ngIf="isLoggedIn">
