@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
             error: () => {
                 console.error(`POST ${endpoint} : Error`);
                 this.loading = false;
+                this._loginSvc.isLoggedIn();
             }
         })
     }
