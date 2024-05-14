@@ -1,13 +1,17 @@
+<h1>RPI Power Control</h1>
+
 <div *ngIf="!isLoggedIn">
     <input [disabled]="loading" type="text" [(ngModel)]="username" placeholder="Username"/>
     <input [disabled]="loading" type="password" [(ngModel)]="password" placeholder="Password"/>
     <button [disabled]="loading" (click)="submit()">Log in</button>
+    <p *ngIf="loading">Logging in...</p>
 </div>
 
 <div *ngIf="isLoggedIn">
     <button [disabled]="loading" (click)="powerOn()">Power On</button>
     <button [disabled]="loading" (click)="powerOff()">Power Off</button>
     <button [disabled]="loading" (click)="restart()">Restart</button>
+    <p *ngIf="loading">{{loadingText}}</p>
 </div>
 
 <router-outlet />

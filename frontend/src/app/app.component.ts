@@ -16,6 +16,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class AppComponent implements OnInit {
     public username = '';
     public password = '';
+    public loadingText = '';
 
     public isLoggedIn = false;
 
@@ -54,14 +55,17 @@ export class AppComponent implements OnInit {
     }
 
     public powerOn() {
+        this.loadingText = 'Powering on...';
         this.postApi('/api/control/on');
     }
 
     public powerOff() {
+        this.loadingText = 'Powering off...';
         this.postApi('/api/control/off');
     }
 
     public restart() {
+        this.loadingText = 'Restarting...';
         this.postApi('/api/control/restart');
     }
 }
