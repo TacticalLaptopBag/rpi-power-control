@@ -36,15 +36,18 @@ export class AppComponent implements OnInit {
     }
 
     private postApi(endpoint: string) {
+        console.log(`POST ${endpoint} ...`);
         this.loading = true;
         this._http.post(endpoint, null, {
             observe: 'response',
             headers: this._loginSvc.getAuthHeader()
         }).subscribe({
             next: (response) => {
+                console.log(`POST ${endpoint} : Success`);
                 this.loading = false;
             },
             error: () => {
+                console.error(`POST ${endpoint} : Error`);
                 this.loading = false;
             }
         })
