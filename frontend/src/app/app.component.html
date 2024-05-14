@@ -1,0 +1,13 @@
+<div *ngIf="!isLoggedIn">
+    <input type="text" [(ngModel)]="username" placeholder="Username"/>
+    <input type="hidden" [(ngModel)]="password" placeholder="Password"/>
+    <input type="submit" (onsubmit)="submit()"/>
+</div>
+
+<div *ngIf="isLoggedIn">
+    <button (click)="powerOn()">Power On</button>
+    <button (click)="powerOff()">Power Off</button>
+    <button (click)="restart()">Restart</button>
+</div>
+
+<router-outlet />
