@@ -14,6 +14,7 @@ echo "Building frontend..."
 cd frontend
 npm install
 npm run build
+mkdir ../rpi-power-control/app
 cp -rfv dist/frontend/browser/* ../rpi-power-control/app
 
 echo "Downloading production dependencies..."
