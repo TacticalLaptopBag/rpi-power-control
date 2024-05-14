@@ -3,12 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { LoginService } from './login.service';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, FormsModule, CommonModule],
+    imports: [RouterOutlet, FormsModule, CommonModule, HttpClientModule],
+    providers: [LoginService],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
