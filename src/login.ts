@@ -63,5 +63,25 @@ function getLogin(request: Request, response: Response) {
 export function setupLogin(app: Express) {
     app.post('/api/login', (request, response) => postLogin(request, response));
     app.get('/api/login', (request, response) => getLogin(request, response));
+}
 
+export function isLoggedIn(request: Request): boolean {
+    const username = process.env.USER_NAME;
+    const secret = process.env.JWT_SECRET;
+    const headerName = process.env.JWT_HEADER;
+    if(username === undefined || secret === undefined || headerName === undefined) {
+        console.error('USER_NAME, JWT_SECRET, or JWT_HEADER is not defined!');
+        return false;
+    }
+
+    const encodedToken = request.get(headerName);
+    if(encodedToken === undefined)
+        return false;
+
+    try {
+        const token = verify(encodedToken, secret);
+        return token !== undefined;
+    } catch {
+        return false;
+    }
 }

@@ -1,20 +1,14 @@
 import { Express, Request, Response } from "express";
 import { Gpio } from "onoff";
 import { delay } from "./delay";
-
-// function postOn(request: Request, response: Response, output: Gpio) {
-//     console.log(`Pulling GPIO ${process.env.LED_PIN} HIGH`);
-//     output.writeSync(1);
-//     response.send();
-// }
-
-// function postOff(request: Request, response: Response, output: Gpio) {
-//     console.log(`Pulling GPIO ${process.env.LED_PIN} LOW`);
-//     output.writeSync(0);
-//     response.send();
-// }
+import { isLoggedIn } from "./login";
 
 function postOn(request: Request, response: Response, output: Gpio) {
+    if(!isLoggedIn(request)) {
+        response.status(401).send('Unauthorized');
+        return;
+    }
+
     console.log('Powering server ON');
     output.writeSync(1);
     delay(1000).then(() => {
@@ -25,6 +19,11 @@ function postOn(request: Request, response: Response, output: Gpio) {
 }
 
 function postOff(request: Request, response: Response, output: Gpio) {
+    if(!isLoggedIn(request)) {
+        response.status(401).send('Unauthorized');
+        return;
+    }
+
     console.log('Powering server OFF');
     output.writeSync(1);
     delay(6000).then(() => {
@@ -35,6 +34,11 @@ function postOff(request: Request, response: Response, output: Gpio) {
 }
 
 function postRestart(request: Request, response: Response, output: Gpio) {
+    if(!isLoggedIn(request)) {
+        response.status(401).send('Unauthorized');
+        return;
+    }
+
     console.log('Forcefully restarting server');
     output.writeSync(1);
     delay(6000).then(() => {
