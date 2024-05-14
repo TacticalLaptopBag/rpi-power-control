@@ -59,30 +59,35 @@ export class LoginService {
         });
     }
 
-    public login(username: string, password: string) {
-        console.log('Logging in...');
-        this._http.post('/api/login', null, {
-            observe: 'response',
-            headers: {
-                auth_username: username,
-                auth_password: password,
-            }
-        }).subscribe({
-            next: (response) => {
-                const token = response.headers.get('jwt_auth_token');
-                if (response.ok && token !== null) {
-                    console.log('Successfully logged in');
-                    this._isLoggedIn = true;
-                    this._token = token;
-                } else {
+    public login(username: string, password: string): Promise<boolean> {
+        return new Promise<boolean>((resolve) => {
+            console.log('Logging in...');
+            this._http.post('/api/login', null, {
+                observe: 'response',
+                headers: {
+                    auth_username: username,
+                    auth_password: password,
+                }
+            }).subscribe({
+                next: (response) => {
+                    const token = response.headers.get('jwt_auth_token');
+                    if (response.ok && token !== null) {
+                        console.log('Successfully logged in');
+                        this._isLoggedIn = true;
+                        this._token = token;
+                        resolve(true);
+                    } else {
+                        console.error('Failed to log in');
+                        this._isLoggedIn = false;
+                        resolve(false);
+                    }
+                },
+                error: () => {
                     console.error('Failed to log in');
                     this._isLoggedIn = false;
+                    resolve(false);
                 }
-            },
-            error: () => {
-                console.error('Failed to log in');
-                this._isLoggedIn = false;
-            }
+            });
         });
     }
 }

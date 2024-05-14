@@ -33,7 +33,10 @@ export class AppComponent implements OnInit {
     }
 
     public submit() {
-        this._loginSvc.login(this.username, this.password);
+        this._loginSvc.login(this.username, this.password).then(() => {
+            this.username = '';
+            this.password = '';
+        });
     }
 
     private postApi(endpoint: string) {
